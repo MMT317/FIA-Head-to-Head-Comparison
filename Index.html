@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Indexed Annuity Comparison Analysis | MMT Financial & Insurance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #ecf0f1;
+            margin-top: 15px;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+
+        .intro h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .intro p {
+            color: #555;
+            font-size: 1.1em;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .comparison-wrapper {
+            overflow-x: auto;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 800px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+        }
+
+        th {
+            padding: 20px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1em;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+
+        th:last-child {
+            border-right: none;
+            border-radius: 0 8px 0 0;
+        }
+
+        .product-header {
+            text-align: center !important;
+            font-size: 1.1em;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        td {
+            padding: 18px 15px;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        td:last-child {
+            border-right: none;
+        }
+
+        .feature-cell {
+            font-weight: 600;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+        }
+
+        .value-cell {
+            text-align: center;
+            font-size: 0.95em;
+        }
+
+        .highlight-best {
+            background-color: #d4edda;
+            font-weight: 600;
+            color: #155724;
+        }
+
+        .highlight-winner {
+            background-color: #fff3cd;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        .performance-note {
+            background: #e8f4f8;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 5px solid #3498db;
+        }
+
+        .performance-note h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .performance-note ul {
+            list-style-position: inside;
+            color: #555;
+            line-height: 1.9;
+        }
+
+        .performance-note li {
+            margin-bottom: 8px;
+        }
+
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .metric-card h4 {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-card .value {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .metric-card .label {
+            font-size: 0.9em;
+            opacity: 0.85;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 50px;
+            margin-top: 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1em;
+        }
+
+        .contact-item a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #5dade2;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .footer p {
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            border-left: 5px solid #ffc107;
+            font-size: 0.9em;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .key-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MMT Financial & Insurance</h1>
+            <p>Professional Fixed Indexed Annuity Analysis</p>
+            <p class="subtitle">Marc Merritt, RVP & Marylene Teopengco-Merritt, RVP | Freedom Equity Group</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <h2>Expert FIA Contract Comparison & Analysis</h2>
+                <p>This is an example of the comprehensive analysis we provide when comparing Fixed Indexed Annuity contracts. Whether you're evaluating your existing FIA or comparing multiple options, we deliver detailed, side-by-side comparisons to help you make informed decisions.</p>
+            </div>
+
+            <div class="key-metrics">
+                <div class="metric-card">
+                    <h4>Best Year 10 Income</h4>
+                    <div class="value">$51,113</div>
+                    <div class="label">Corebridge Power Adv. 10</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Highest 10-Yr Growth</h4>
+                    <div class="value">7.32%</div>
+                    <div class="label">Average Annual Rate</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Largest Premium Bonus</h4>
+                    <div class="value">15%</div>
+                    <div class="label">F&G Performance Pro®</div>
+                </div>
+            </div>
+
+            <div class="comparison-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="product-header">F&G<br>Accelerator Plus® 10</th>
+                            <th class="product-header">F&G<br>Performance Pro®</th>
+                            <th class="product-header">Corebridge<br>Power Adv. 10</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-cell">Premium</td>
+                            <td class="value-cell">$400,000</td>
+                            <td class="value-cell">$433,000</td>
+                            <td class="value-cell">$433,000</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Premium Bonus</td>
+                            <td class="value-cell">3% ($12,000)</td>
+                            <td class="value-cell highlight-best">15% ($64,950)</td>
+                            <td class="value-cell">10% ($43,300) to IB</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Day-One Account Value</td>
+                            <td class="value-cell">$412,000</td>
+                            <td class="value-cell highlight-best">$497,950</td>
+                            <td class="value-cell">$476,300</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Rider Fee</td>
+                            <td class="value-cell">1.20% of IB</td>
+                            <td class="value-cell highlight-best">0.10% of IB</td>
+                            <td class="value-cell">0.95% of IB</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Performance Multiplier</td>
+                            <td class="value-cell">None</td>
+                            <td class="value-cell">None</td>
+                            <td class="value-cell highlight-winner">Up to 75%</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Index Strategy</td>
+                            <td class="value-cell">S&P 500 (5% Cap)</td>
+                            <td class="value-cell">Bal. Asset 5<br>(125/175% PAR)</td>
+                            <td class="value-cell">8-way diversified</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Account Value Year 10 (Current)</td>
+                            <td class="value-cell">~$433,000*</td>
+                            <td class="value-cell">$528,080</td>
+                            <td class="value-cell">$486,791</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Income Base Year 10</td>
+                            <td class="value-cell">$563,285*</td>
+                            <td class="value-cell">$575,502</td>
+                            <td class="value-cell highlight-best">$851,884</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Annual Income Year 10</td>
+                            <td class="value-cell">~$28,164†</td>
+                            <td class="value-cell">$33,667 (5.85%)</td>
+                            <td class="value-cell highlight-best">$51,113 (6.00%)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Impairment Benefit (2X)</td>
+                            <td class="value-cell">N/A</td>
+                            <td class="value-cell">$67,334</td>
+                            <td class="value-cell highlight-best">$102,226</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">10-Yr Avg Credited Rate</td>
+                            <td class="value-cell">~4.57%</td>
+                            <td class="value-cell">5.64%</td>
+                            <td class="value-cell highlight-best">7.32%</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-cell">Surrender Charges</td>
+                            <td class="value-cell">9/9/8/7/6/5/4/3/2/1%</td>
+                            <td class="value-cell">9/9/8/7/6/5/4/3/2/1%</td>
+                            <td class="value-cell">9/9/8/7/6/5/4/3/2/1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="performance-note">
+                <h3>Key Analysis Insights</h3>
+                <ul>
+                    <li><strong>Income Performance:</strong> Corebridge Power Adv. 10 delivers 81% higher annual income at Year 10 compared to F&G Accelerator Plus® 10 ($51,113 vs $28,164)</li>
+                    <li><strong>Growth Advantage:</strong> Corebridge's 7.32% average credited rate significantly outperforms both F&G products (4.57% and 5.64%)</li>
+                    <li><strong>Performance Multiplier:</strong> Corebridge's up to 75% performance multiplier on income base growth creates substantial long-term advantage</li>
+                    <li><strong>Premium Bonus:</strong> F&G Performance Pro® offers the highest day-one premium bonus at 15%, but Corebridge's performance multiplier creates greater value over time</li>
+                    <li><strong>Fee Efficiency:</strong> F&G Performance Pro® has the lowest rider fee at 0.10%, though all products remain competitive</li>
+                    <li><strong>Impairment Protection:</strong> Corebridge provides superior 2X impairment benefit at $102,226 annually</li>
+                </ul>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Important Notes:</strong> *Corebridge values as of 1/30/26 statement after 7 years. †Estimated based on 5% of Income Base. All F&G figures are hypothetical illustrations based on current rates. This is a sample comparison for demonstration purposes. Actual performance may vary. Past performance is not indicative of future results.
+            </div>
+
+            <div class="cta-section">
+                <h2>Get Your Personalized FIA Analysis</h2>
+                <p>We provide comprehensive, objective comparisons of Fixed Indexed Annuity contracts tailored to your specific situation and goals.</p>
+                <p><strong>Our Services Include:</strong></p>
+                <ul style="text-align: left; max-width: 600px; margin: 20px auto; list-style-position: inside;">
+                    <li>Existing FIA contract performance review and analysis</li>
+                    <li>Side-by-side comparison of multiple FIA options</li>
+                    <li>Income projection modeling and optimization</li>
+                    <li>Tax-efficiency analysis and strategies</li>
+                    <li>Integration with overall estate and wealth transfer planning</li>
+                </ul>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>Marc Merritt, RVP:</strong>
+                        <a href="mailto:marc@mmtfininsurance.com">marc@mmtfininsurance.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Marylene Teopengco-Merritt, RVP:</strong>
+                        <a href="mailto:marylene@mmtfininsurance.com">marylene@mmtfininsurance.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>MMT Financial & Insurance</strong></p>
+            <p>Marc Merritt, RVP (NY Lic LA-1010090) | Marylene Teopengco-Merritt, RVP (NY Lic LA-1298496)</p>
+            <p>Freedom Equity Group | Licensed NY/NJ/AZ | Nationwide Appointments Pending</p>
+            <p style="margin-top: 15px; font-size: 0.85em; opacity: 0.8;">
+                Fixed Indexed Annuities are insurance products designed for retirement income planning. They are not investments or bank products. 
+                Guarantees are based on the financial strength and claims-paying ability of the issuing insurance company.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
